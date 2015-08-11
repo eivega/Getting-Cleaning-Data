@@ -1,16 +1,16 @@
 ### Step 1  Merges and test ###
 setwd("~/Desktop/Coursera//Getting-Cleaning-Data")
-trainData <- read.table("./train/X_train.txt")
+trainData <- read.table("./GCD/train/X_train.txt")
 dim(trainData)
 head(trainData)
-trainLabel <- read.table("./train/y_train.txt")
+trainLabel <- read.table("./GCD/train/y_train.txt")
 table(trainLabel)
-trainSubject <- read.table("./train/subject_train.txt")
-testData <- read.table("./test/X_test.txt")
+trainSubject <- read.table("./GCD/train/subject_train.txt")
+testData <- read.table("./GCD/test/X_test.txt")
 dim(testData)
-testLabel <- read.table("./test/y_test.txt") 
+testLabel <- read.table("./GCD/test/y_test.txt") 
 table(testLabel) 
-testSubject <- read.table("./test/subject_test.txt")
+testSubject <- read.table("./GCD/test/subject_test.txt")
 joinData <- rbind(trainData, testData)
 dim(joinData)
 joinLabel <- rbind(trainLabel, testLabel)
@@ -19,7 +19,7 @@ joinSubject <- rbind(trainSubject, testSubject)
 dim(joinSubject) 
 
 ### Step 2 Extract mean and standard ###
-features <- read.table("./features.txt")
+features <- read.table("./GCD/features.txt")
 dim(features)
 meanStdIndices <- grep("mean\\(\\)|std\\(\\)", features[, 2])
 length(meanStdIndices)
@@ -30,7 +30,7 @@ names(joinData) <- gsub("mean", "Mean", names(joinData)) #Capitalize M
 names(joinData) <- gsub("std", "Std", names(joinData)) # Capitalize S
 names(joinData) <- gsub("-", "", names(joinData)) #Remove - in between columns names
 ### Step 3 Use descriptive ###
-activity <- read.table("./activity_labels.txt")
+activity <- read.table("./GCD/activity_labels.txt")
 activity[, 2] <- tolower(gsub("_", "", activity[, 2]))
 substr(activity[2, 2], 8, 8) <- toupper(substr(activity[2, 2], 8, 8))
 substr(activity[3, 2], 8, 8) <- toupper(substr(activity[3, 2], 8, 8))
